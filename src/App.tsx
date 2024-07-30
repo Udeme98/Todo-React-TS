@@ -1,9 +1,9 @@
-function App() {
+const App = () => {
   return (
-    <>
-      <h2>Hello Typescript</h2>
-    </>
+    <div className="App">
+      <span className="heading">Taskify</span>
+    </div>
   );
-}
+};
 
 export default App;
