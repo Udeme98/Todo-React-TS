@@ -1,11 +1,12 @@
 type TodoProps = {
   todo: string;
   setTodo: React.Dispatch<React.SetStateAction<string>>;
+  handleAdd: (e: React.FormEvent) => void;
 };
 
-const InputField = ({ todo, setTodo }: TodoProps) => {
+const InputField = ({ todo, setTodo, handleAdd }: TodoProps) => {
   return (
-    <form className="input">
+    <form className="input" onSubmit={handleAdd}>
       <input
         type="input"
         value={todo}
