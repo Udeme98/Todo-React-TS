@@ -1,7 +1,7 @@
 import { AiFillDelete, AiFillEdit } from "react-icons/ai";
 import { TodoModel } from "../todoModel";
 import { MdDone } from "react-icons/md";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 type SingleProp = {
   todo: TodoModel;
@@ -12,6 +12,12 @@ type SingleProp = {
 const SingleTodo = ({ todo, todos, setTodos }: SingleProp) => {
   const [edit, setEdit] = useState<boolean>(false);
   const [editTodo, setEditTodo] = useState<string>(todo.todo);
+
+  const EditRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    EditRef.current?.focus();
+  }, [edit]);
 
   const handleDone = (id: number) => {
     setTodos(
@@ -45,6 +51,7 @@ const SingleTodo = ({ todo, todos, setTodos }: SingleProp) => {
           value={editTodo}
           onChange={(e) => setEditTodo(e.target.value)}
           className="todos_single_text"
+          ref={EditRef}
         />
       ) : todo.isDone ? (
         <s className="todos_single_text">{todo.todo}</s>
