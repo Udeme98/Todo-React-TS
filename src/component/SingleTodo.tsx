@@ -10,7 +10,7 @@ type SingleProp = {
 };
 
 const SingleTodo = ({ todo, todos, setTodos }: SingleProp) => {
-  const [edit, setEdit] = useState<boolan>(false);
+  const [edit, setEdit] = useState<boolean>(false);
   const [editTodo, setEditTodo] = useState<string>(todo.todo);
 
   const handleDone = (id: number) => {
@@ -27,9 +27,26 @@ const SingleTodo = ({ todo, todos, setTodos }: SingleProp) => {
     setTodos(todos.filter((todoItem) => todoItem.id !== id));
   };
 
+  const handleEdit = (e: React.FormEvent, id: number) => {
+    e.preventDefault();
+
+    setTodos(
+      todos.map((todoItem) =>
+        todoItem.id === id ? { ...todoItem, todo: editTodo } : todoItem
+      )
+    );
+    setEdit(false);
+  };
+
   return (
-    <form className="todos_single">
-      {todo.isDone ? (
+    <form className="todos_single" onSubmit={(e) => handleEdit(e, todo.id)}>
+      {edit ? (
+        <input
+          value={editTodo}
+          onChange={(e) => setEditTodo(e.target.value)}
+          className="todos_single_text"
+        />
+      ) : todo.isDone ? (
         <s className="todos_single_text">{todo.todo}</s>
       ) : (
         <span className="todos_single_text">{todo.todo}</span>
