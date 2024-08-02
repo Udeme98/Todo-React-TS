@@ -10,7 +10,7 @@ type SingleProp = {
 };
 
 const SingleTodo = ({ todo, todos, setTodos }: SingleProp) => {
-  const [edit, setEdit] = useState<boolean>(false);
+  const [edit, setEdit] = useState<boolan>(false);
   const [editTodo, setEditTodo] = useState<string>(todo.todo);
 
   const handleDone = (id: number) => {
