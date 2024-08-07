@@ -26,6 +26,6 @@ const TodoReducer = (state: TodoModel[], action: Actions) => {
 
 const UseReducer = () => {
   const [state, disptch] = useReducer(TodoReducer, initialState);
-  return <div></div>;
+  return <div>state</div>;
 };
 export default UseReducer;
